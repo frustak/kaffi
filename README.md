@@ -1,0 +1,3 @@
+# Kaffi
+
+## Budget manager
