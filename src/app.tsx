@@ -3,7 +3,7 @@ import { createStorageSignal } from "@solid-primitives/storage"
 import clsx from "clsx"
 import { formatRelative } from "date-fns"
 import { nanoid } from "nanoid"
-import { Component, ComponentProps, For, ParentComponent } from "solid-js"
+import { Component, ComponentProps, For, ParentComponent, Show } from "solid-js"
 import { z } from "zod"
 
 export const App: Component = () => {
@@ -18,7 +18,7 @@ type Income = {
 	id: string
 	amount: number
 	date: Date
-	from?: string
+	source?: string
 }
 
 const [incomes, setIncomes] = createStorageSignal<Income[]>("incomes", [], {
@@ -39,14 +39,14 @@ const removeIncome = (income: Income) => {
 }
 
 const IncomeList: Component = () => {
-	const incomeSchema = z.object({ amount: z.number(), date: z.string(), from: z.string() })
+	const incomeSchema = z.object({ amount: z.number(), date: z.string(), source: z.string() })
 	type Income = z.infer<typeof incomeSchema>
 	const incomeForm = createForm<Income>({
 		validate: zodForm(incomeSchema),
 		initialValues: {
 			amount: undefined,
 			date: new Date().toISOString(),
-			from: "",
+			source: "",
 		},
 	})
 
@@ -56,9 +56,10 @@ const IncomeList: Component = () => {
 			<div class="flex flex-col gap-4">
 				<For each={incomes()}>{(income) => <IncomeItem income={income} />}</For>
 			</div>
+			<hr class="border-0 bg-brand-text/50 h-px my-10" />
 			<Form
 				of={incomeForm}
-				class="flex flex-col gap-1 mt-4 items-start"
+				class="flex flex-col gap-1 items-start"
 				onSubmit={(values) => {
 					addIncome({ ...values, id: nanoid(), date: new Date(values.date) })
 					reset(incomeForm)
@@ -75,11 +76,11 @@ const IncomeList: Component = () => {
 						/>
 					)}
 				</Field>
-				<Field of={incomeForm} name="from">
+				<Field of={incomeForm} name="source">
 					{(field) => (
 						<Input
 							{...field.props}
-							placeholder="Where from"
+							placeholder="Source"
 							type="text"
 							value={field.value}
 						/>
@@ -113,9 +114,11 @@ const IncomeItem: Component<{ income: Income }> = (props) => {
 				<p class="text-xs text-brand-text/70">
 					{formatRelative(props.income.date, new Date())}
 				</p>
-				<p class="text-sm">
-					<span class="font-600">From</span> {props.income.from}
-				</p>
+				<Show when={props.income.source}>
+					<p class="text-sm">
+						<span class="font-600">Source</span> - {props.income.source}
+					</p>
+				</Show>
 			</div>
 			<Button onClick={handleRemove}>Delete</Button>
 		</div>
@@ -123,7 +126,7 @@ const IncomeItem: Component<{ income: Income }> = (props) => {
 }
 
 const Layout: ParentComponent = (props) => (
-	<main class="font-body text-brand-text bg-brand-secondary/10 min-h-screen">
+	<main class="font-body text-brand-text bg-brand-background min-h-screen">
 		<div class="max-w-prose mx-auto pt-5xl">{props.children}</div>
 	</main>
 )
@@ -142,7 +145,7 @@ const Button: Component<ComponentProps<"button">> = (props) => (
 	<button
 		{...props}
 		class={clsx(
-			"font-body border-none bg-transparent focus:outline-none text-lg cursor-pointer",
+			"font-body border-none bg-transparent focus:outline-none cursor-pointer text-xs font-900",
 			props.class
 		)}
 	>
