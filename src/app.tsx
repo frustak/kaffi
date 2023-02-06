@@ -39,13 +39,12 @@ const removeIncome = (income: Income) => {
 }
 
 const IncomeList: Component = () => {
-	const incomeSchema = z.object({ amount: z.number(), date: z.string(), source: z.string() })
+	const incomeSchema = z.object({ amount: z.number(), source: z.string() })
 	type Income = z.infer<typeof incomeSchema>
 	const incomeForm = createForm<Income>({
 		validate: zodForm(incomeSchema),
 		initialValues: {
 			amount: undefined,
-			date: new Date().toISOString(),
 			source: "",
 		},
 	})
@@ -61,7 +60,7 @@ const IncomeList: Component = () => {
 				of={incomeForm}
 				class="flex flex-col gap-1 items-start"
 				onSubmit={(values) => {
-					addIncome({ ...values, id: nanoid(), date: new Date(values.date) })
+					addIncome({ ...values, id: nanoid(), date: new Date() })
 					reset(incomeForm)
 				}}
 			>
@@ -82,16 +81,6 @@ const IncomeList: Component = () => {
 							{...field.props}
 							placeholder="Source"
 							type="text"
-							value={field.value}
-						/>
-					)}
-				</Field>
-				<Field of={incomeForm} name="date">
-					{(field) => (
-						<Input
-							{...field.props}
-							placeholder="Date"
-							type="date"
 							value={field.value}
 						/>
 					)}
