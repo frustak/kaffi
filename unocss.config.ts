@@ -12,11 +12,13 @@ export default defineConfig({
 			},
 		}),
 		{
+			name: "custom",
 			theme: {
 				colors: {
 					brand: {
 						text: "#323031",
 						secondary: "#FFC857",
+						background: "#FFF7E7",
 					},
 				},
 			},
