@@ -20,9 +20,9 @@ export const IncomeForm: Component = () => {
 				/>
 				<InputField
 					of={incomeForm}
-					name="source"
-					label="Source"
-					placeholder="Source"
+					name="description"
+					label="Description"
+					placeholder="Description"
 					type="text"
 				/>
 			</div>
@@ -33,7 +33,7 @@ export const IncomeForm: Component = () => {
 
 const incomeSchema = z.object({
 	amount: z.number(),
-	source: z.string(),
+	description: z.string(),
 })
 
 type IncomeInput = z.infer<typeof incomeSchema>
@@ -42,7 +42,7 @@ const incomeForm = createForm<IncomeInput>({
 	validate: zodForm(incomeSchema),
 	initialValues: {
 		amount: undefined,
-		source: "",
+		description: "",
 	},
 })
 
