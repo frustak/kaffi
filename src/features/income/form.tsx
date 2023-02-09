@@ -8,8 +8,8 @@ import { addIncome } from "./store"
 
 export const IncomeForm: Component = () => {
 	return (
-		<Form of={incomeForm} onSubmit={submitForm} class="flex justify-between items-center">
-			<div>
+		<Form of={incomeForm} onSubmit={submitForm} class="flex justify-between items-end">
+			<div class="grow">
 				<InputField
 					of={incomeForm}
 					name="amount"

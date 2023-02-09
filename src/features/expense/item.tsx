@@ -8,15 +8,17 @@ export const ExpenseItem: Component<{ expense: Expense }> = (props) => {
 	const handleRemove = () => removeExpense(props.expense)
 
 	return (
-		<div class="flex items-center justify-between leading-loose">
-			<div>
+		<div class="flex justify-between">
+			<div class="flex flex-col gap-1">
 				<p>${props.expense.amount}</p>
+				<p class="text-sm">{props.expense.description}</p>
+			</div>
+			<div class="flex flex-col items-end gap-1">
 				<p class="text-xs text-brand-text/70">
 					{formatRelative(props.expense.date, new Date())}
 				</p>
-				<p class="text-sm">{props.expense.description}</p>
+				<Button onClick={handleRemove}>Delete</Button>
 			</div>
-			<Button onClick={handleRemove}>Delete</Button>
 		</div>
 	)
 }
