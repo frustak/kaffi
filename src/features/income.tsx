@@ -1,10 +1,11 @@
-import { createForm, Field, Form, reset, zodForm } from "@modular-forms/solid"
+import { createForm, Form, reset, zodForm } from "@modular-forms/solid"
 import { createStorageSignal } from "@solid-primitives/storage"
 import { formatRelative } from "date-fns"
 import { nanoid } from "nanoid"
 import { Component, For, Show } from "solid-js"
 import { z } from "zod"
-import { Button, Divider, Input, Title } from "../ui"
+import { InputField } from "../ui/compound"
+import { Button, Divider, Title } from "../ui/simple"
 
 export const IncomeSection: Component = () => {
 	return (
@@ -84,22 +85,8 @@ const submitForm = (values: IncomeInput) => {
 const IncomeForm: Component = () => {
 	return (
 		<Form of={incomeForm} class="flex flex-col gap-1 items-start" onSubmit={submitForm}>
-			<Field of={incomeForm} name="amount">
-				{(field) => (
-					<Input
-						{...field.props}
-						placeholder="Income"
-						type="number"
-						value={field.value}
-						required
-					/>
-				)}
-			</Field>
-			<Field of={incomeForm} name="source">
-				{(field) => (
-					<Input {...field.props} placeholder="Source" type="text" value={field.value} />
-				)}
-			</Field>
+			<InputField of={incomeForm} name="amount" placeholder="Income" type="number" required />
+			<InputField of={incomeForm} name="source" placeholder="Source" type="text" />
 			<Button type="submit" class="self-end">
 				Add
 			</Button>
