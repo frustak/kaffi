@@ -1,5 +1,5 @@
 import { Field, FieldPath, FieldValues, FormState } from "@modular-forms/solid"
-import { ComponentProps } from "solid-js"
+import { ComponentProps, Show } from "solid-js"
 import { Input } from "../ui/simple"
 
 type InputFieldProps<
@@ -8,6 +8,7 @@ type InputFieldProps<
 > = {
 	of: FormState<TFieldValues>
 	name: TFieldName
+	label?: string
 } & ComponentProps<"input">
 
 export const InputField = <
@@ -17,6 +18,20 @@ export const InputField = <
 	props: InputFieldProps<TFieldValues, TFieldName>
 ) => (
 	<Field of={props.of} name={props.name}>
-		{(field) => <Input {...props} {...field.props} value={field.value?.toString()} />}
+		{(field) => (
+			<div class="flex flex-col">
+				<Show when={props.label}>
+					<label for={field.name} class="text-sm">
+						{props.label}
+					</label>
+				</Show>
+				<Input
+					id={field.name}
+					{...props}
+					{...field.props}
+					value={field.value?.toString()}
+				/>
+			</div>
+		)}
 	</Field>
 )

@@ -7,14 +7,12 @@ export const Layout: ParentComponent = (props) => (
 	</main>
 )
 
-export const Title: ParentComponent = (props) => (
-	<h1 class="text-5xl leading-loose">{props.children}</h1>
-)
+export const Title: ParentComponent = (props) => <h1 class="text-5xl">{props.children}</h1>
 
 export const Input: Component<ComponentProps<"input">> = (props) => (
 	<input
 		type="text"
-		class="bg-transparent focus:outline-none border-none font-body text-brand-text text-base placeholder:text-brand-text/40"
+		class="bg-transparent focus:outline-none border-none font-body text-brand-text text-base p-0 placeholder:text-brand-text/40"
 		{...props}
 	/>
 )
@@ -31,4 +29,4 @@ export const Button: Component<ComponentProps<"button">> = (props) => (
 	</button>
 )
 
-export const Divider: Component = () => <hr class="border-0 bg-brand-text/50 h-px my-10" />
+export const Divider: Component = () => <hr class="border-0 bg-brand-text/50 h-px w-full" />

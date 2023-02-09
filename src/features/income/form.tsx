@@ -8,12 +8,25 @@ import { addIncome } from "./store"
 
 export const IncomeForm: Component = () => {
 	return (
-		<Form of={incomeForm} class="flex flex-col gap-1 items-start" onSubmit={submitForm}>
-			<InputField of={incomeForm} name="amount" placeholder="Income" type="number" required />
-			<InputField of={incomeForm} name="source" placeholder="Source" type="text" />
-			<Button type="submit" class="self-end">
-				Add
-			</Button>
+		<Form of={incomeForm} onSubmit={submitForm} class="flex justify-between items-center">
+			<div>
+				<InputField
+					of={incomeForm}
+					name="amount"
+					label="Amount"
+					placeholder="Amount"
+					type="number"
+					required
+				/>
+				<InputField
+					of={incomeForm}
+					name="source"
+					label="Source"
+					placeholder="Source"
+					type="text"
+				/>
+			</div>
+			<Button type="submit">Add</Button>
 		</Form>
 	)
 }
