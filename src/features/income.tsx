@@ -4,7 +4,18 @@ import { formatRelative } from "date-fns"
 import { nanoid } from "nanoid"
 import { Component, For, Show } from "solid-js"
 import { z } from "zod"
-import { Button, Input, Title } from "../ui"
+import { Button, Divider, Input, Title } from "../ui"
+
+export const IncomeSection: Component = () => {
+	return (
+		<div>
+			<Title>Income</Title>
+			<IncomeList />
+			<Divider />
+			<IncomeForm />
+		</div>
+	)
+}
 
 type Income = {
 	id: string
@@ -16,7 +27,10 @@ type Income = {
 const [incomes, setIncomes] = createStorageSignal<Income[]>("incomes", [], {
 	serializer: (value) => JSON.stringify(value),
 	deserializer: (value) =>
-		JSON.parse(value).map((income) => ({ ...income, date: new Date(income.date) })),
+		JSON.parse(value).map((income) => ({
+			...income,
+			date: new Date(income.date),
+		})),
 })
 
 const addIncome = (income: Income) => {
@@ -26,62 +40,70 @@ const addIncome = (income: Income) => {
 	})
 }
 
-const removeIncome = (income: Income) => {
-	setIncomes((incomes) => incomes?.filter((i) => i.id !== income.id) ?? null)
+const removeIncome = (target: Income) => {
+	setIncomes((incomes) => incomes?.filter((income) => income.id !== target.id) ?? null)
 }
 
-export const IncomeList: Component = () => {
-	const incomeSchema = z.object({ amount: z.number(), source: z.string() })
-	type Income = z.infer<typeof incomeSchema>
-	const incomeForm = createForm<Income>({
-		validate: zodForm(incomeSchema),
-		initialValues: {
-			amount: undefined,
-			source: "",
-		},
-	})
+const incomeSchema = z.object({
+	amount: z.number(),
+	source: z.string(),
+})
 
+type IncomeInput = z.infer<typeof incomeSchema>
+
+const incomeForm = createForm<IncomeInput>({
+	validate: zodForm(incomeSchema),
+	initialValues: {
+		amount: undefined,
+		source: "",
+	},
+})
+
+const IncomeList: Component = () => {
 	return (
-		<div>
-			<Title>Income</Title>
-			<div class="flex flex-col gap-4">
-				<For each={incomes()}>{(income) => <IncomeItem income={income} />}</For>
-			</div>
-			<hr class="border-0 bg-brand-text/50 h-px my-10" />
-			<Form
-				of={incomeForm}
-				class="flex flex-col gap-1 items-start"
-				onSubmit={(values) => {
-					addIncome({ ...values, id: nanoid(), date: new Date() })
-					reset(incomeForm)
-				}}
+		<div class="flex flex-col gap-4">
+			<For
+				fallback={<p class="text-sm">You have not added any income yet!</p>}
+				each={incomes()}
 			>
-				<Field of={incomeForm} name="amount">
-					{(field) => (
-						<Input
-							{...field.props}
-							placeholder="Income"
-							type="number"
-							value={field.value}
-							required
-						/>
-					)}
-				</Field>
-				<Field of={incomeForm} name="source">
-					{(field) => (
-						<Input
-							{...field.props}
-							placeholder="Source"
-							type="text"
-							value={field.value}
-						/>
-					)}
-				</Field>
-				<Button type="submit" class="self-end">
-					Add
-				</Button>
-			</Form>
+				{(income) => <IncomeItem income={income} />}
+			</For>
 		</div>
+	)
+}
+
+const submitForm = (values: IncomeInput) => {
+	addIncome({
+		...values,
+		id: nanoid(),
+		date: new Date(),
+	})
+	reset(incomeForm)
+}
+
+const IncomeForm: Component = () => {
+	return (
+		<Form of={incomeForm} class="flex flex-col gap-1 items-start" onSubmit={submitForm}>
+			<Field of={incomeForm} name="amount">
+				{(field) => (
+					<Input
+						{...field.props}
+						placeholder="Income"
+						type="number"
+						value={field.value}
+						required
+					/>
+				)}
+			</Field>
+			<Field of={incomeForm} name="source">
+				{(field) => (
+					<Input {...field.props} placeholder="Source" type="text" value={field.value} />
+				)}
+			</Field>
+			<Button type="submit" class="self-end">
+				Add
+			</Button>
+		</Form>
 	)
 }
 

@@ -30,3 +30,5 @@ export const Button: Component<ComponentProps<"button">> = (props) => (
 		{props.children}
 	</button>
 )
+
+export const Divider: Component = () => <hr class="border-0 bg-brand-text/50 h-px my-10" />
