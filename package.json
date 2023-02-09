@@ -6,7 +6,8 @@
 		"dev": "vite",
 		"build": "vite build",
 		"serve": "vite preview",
-		"fmt": "prettier --write ."
+		"fmt": "prettier --write .",
+		"check": "tsc --skipLibCheck --noEmit"
 	},
 	"license": "MIT",
 	"devDependencies": {
