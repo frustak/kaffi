@@ -2,6 +2,7 @@ import { Component } from "solid-js"
 import { BalanceSection } from "./features/balance"
 import { ExpenseSection } from "./features/expense"
 import { IncomeSection } from "./features/income"
+import { SavingSection } from "./features/saving"
 import { Divider, Layout } from "./ui/simple"
 
 export const App: Component = () => {
@@ -13,6 +14,8 @@ export const App: Component = () => {
 				<IncomeSection />
 				<Divider />
 				<ExpenseSection />
+				<Divider />
+				<SavingSection />
 			</div>
 		</Layout>
 	)

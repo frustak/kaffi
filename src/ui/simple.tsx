@@ -3,7 +3,7 @@ import { Component, ComponentProps, ParentComponent } from "solid-js"
 
 export const Layout: ParentComponent = (props) => (
 	<main class="font-body text-brand-text bg-brand-background min-h-screen">
-		<div class="max-w-prose mx-auto pt-5xl">{props.children}</div>
+		<div class="max-w-prose mx-auto py-5xl">{props.children}</div>
 	</main>
 )
 
