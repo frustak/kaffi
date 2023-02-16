@@ -6,7 +6,7 @@ import { SavingInfo } from "./info"
 export const SavingSection: Component = () => {
 	return (
 		<div class="flex flex-col gap-6">
-			<Title>Saving</Title>
+			<Title>Saving Goal</Title>
 			<SavingInfo />
 			<SavingForm />
 		</div>
