@@ -19,6 +19,8 @@ export default defineConfig({
 						text: "#323031",
 						secondary: "#FFC857",
 						background: "#FFF7E7",
+						red: "#f94144",
+						green: "#90be6d",
 					},
 				},
 			},

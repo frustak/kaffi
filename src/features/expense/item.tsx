@@ -11,7 +11,7 @@ export const ExpenseItem: Component<{ expense: Expense }> = (props) => {
 	return (
 		<div class="flex justify-between">
 			<div class="flex flex-col gap-1">
-				<p>{formatCurrency(props.expense.amount)}</p>
+				<p class="bg-brand-red/50">{formatCurrency(props.expense.amount)}</p>
 				<p class="text-sm">{props.expense.description}</p>
 			</div>
 			<div class="flex flex-col items-end gap-1">

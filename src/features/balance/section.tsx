@@ -8,14 +8,29 @@ import { incomes } from "../income/store"
 const balance = () => {
 	const incomeSum = _.sumBy(incomes(), (income) => income.amount)
 	const expenseSum = _.sumBy(expenses(), (expense) => expense.amount)
-	return formatCurrency(incomeSum - expenseSum)
+	return incomeSum - expenseSum
+}
+
+const sign = () => {
+	const sum = balance()
+	if (sum === 0) return ""
+	if (sum > 0) return "+"
+	if (sum < 0) return "-"
 }
 
 export const BalanceSection: Component = () => {
 	return (
 		<div class="flex justify-between items-center">
 			<Title>Balance</Title>
-			<h2 class="text-2xl">{balance()}</h2>
+			<h2
+				class="text-2xl"
+				classList={{
+					"bg-brand-green/50": sign() === "+",
+					"bg-brand-red/50": sign() === "-",
+				}}
+			>
+				{formatCurrency(balance())}
+			</h2>
 		</div>
 	)
 }
