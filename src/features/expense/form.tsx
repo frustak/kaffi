@@ -9,7 +9,7 @@ import { addExpense } from "./store"
 export const ExpenseForm: Component = () => {
 	return (
 		<Form of={expenseForm} onSubmit={submitForm} class="flex justify-between items-end">
-			<div class="grow">
+			<div class="grow flex flex-col gap-2">
 				<InputField
 					of={expenseForm}
 					name="amount"
@@ -17,6 +17,7 @@ export const ExpenseForm: Component = () => {
 					placeholder="Amount"
 					type="number"
 					required
+					icon={<span class="text-brand-text/50">$</span>}
 				/>
 				<InputField
 					of={expenseForm}
