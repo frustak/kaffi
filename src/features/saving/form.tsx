@@ -16,6 +16,7 @@ export const SavingForm: Component = () => {
 					placeholder="Amount"
 					type="number"
 					required
+					icon={<span class="text-brand-text/50">$</span>}
 				/>
 			</div>
 			<Button type="submit">Set</Button>

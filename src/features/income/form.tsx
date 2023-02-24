@@ -9,7 +9,7 @@ import { addIncome } from "./store"
 export const IncomeForm: Component = () => {
 	return (
 		<Form of={incomeForm} onSubmit={submitForm} class="flex justify-between items-end">
-			<div class="grow">
+			<div class="grow flex flex-col gap-2">
 				<InputField
 					of={incomeForm}
 					name="amount"
@@ -17,6 +17,7 @@ export const IncomeForm: Component = () => {
 					placeholder="Amount"
 					type="number"
 					required
+					icon={<span class="text-brand-text/50">$</span>}
 				/>
 				<InputField
 					of={incomeForm}
