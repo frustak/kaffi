@@ -3,6 +3,7 @@ import { BalanceSection } from "./features/balance"
 import { ExpenseSection } from "./features/expense"
 import { IncomeSection } from "./features/income"
 import { SavingSection } from "./features/saving"
+import { SettingsSection } from "./features/settings"
 import { Divider, Layout } from "./ui/simple"
 
 export const App: Component = () => {
@@ -16,6 +17,8 @@ export const App: Component = () => {
 				<ExpenseSection />
 				<Divider />
 				<SavingSection />
+				<Divider />
+				<SettingsSection />
 			</div>
 		</Layout>
 	)
