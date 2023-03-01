@@ -26,4 +26,5 @@ export default defineConfig({
 			},
 		},
 	],
+	rules: [["underline-offset-1", { "text-underline-offset": "2px" }]],
 })
