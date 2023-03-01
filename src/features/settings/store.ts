@@ -3,7 +3,7 @@ import { Settings } from "./types"
 
 const [settings, setSettings] = createStorageSignal<Settings>(
 	"settings",
-	{ currency: "$" },
+	{ currency: "USD" },
 	{
 		serializer: (value) => JSON.stringify(value),
 		deserializer: (value) => JSON.parse(value),
