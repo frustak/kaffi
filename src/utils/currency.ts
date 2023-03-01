@@ -1,6 +1,6 @@
 import { settings } from "../features/settings/store"
 
-function formatCurrency(value: number) {
+function formatMoney(value: number) {
 	let formatted = value.toString()
 	try {
 		formatted = Intl.NumberFormat("en-US", {
@@ -18,4 +18,4 @@ function formatCurrency(value: number) {
 	return formatted
 }
 
-export { formatCurrency }
+export { formatMoney }
