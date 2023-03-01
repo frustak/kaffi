@@ -37,7 +37,7 @@ export const Anchor: ParentComponent<ComponentProps<"a">> = (props) => (
 		rel="noopener noreferrer"
 		{...props}
 		class={clsx(
-			"text-brand-text text-xs underline underline-offset-1 font-black bg-brand-text/10",
+			"text-brand-text text-xs underline underline-offset-1 font-bold bg-brand-text/5",
 			props.class
 		)}
 	/>
