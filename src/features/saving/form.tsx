@@ -3,6 +3,7 @@ import { Component } from "solid-js"
 import { z } from "zod"
 import { InputField } from "../../ui/compound"
 import { Button } from "../../ui/simple"
+import { currencySign } from "../../utils/currency"
 import { setSaving } from "./store"
 
 export const SavingForm: Component = () => {
@@ -16,7 +17,7 @@ export const SavingForm: Component = () => {
 					placeholder="Amount"
 					type="number"
 					required
-					icon={<span class="text-brand-text/50">$</span>}
+					icon={<span class="text-brand-text/50">{currencySign()}</span>}
 				/>
 			</div>
 			<Button type="submit">Set</Button>
