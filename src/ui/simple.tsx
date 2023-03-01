@@ -33,6 +33,8 @@ export const Divider: Component = () => <hr class="border-0 bg-brand-text/50 h-p
 
 export const Anchor: ParentComponent<ComponentProps<"a">> = (props) => (
 	<a
+		target="_blank"
+		rel="noopener noreferrer"
 		{...props}
 		class={clsx(
 			"text-brand-text text-xs underline underline-offset-1 font-black bg-brand-text/10",
