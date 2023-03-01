@@ -1,7 +1,7 @@
 import { formatRelative } from "date-fns"
 import { Component } from "solid-js"
 import { Button } from "../../ui/simple"
-import { formatCurrency } from "../../utils/currency"
+import { formatMoney } from "../../utils/currency"
 import { removeExpense } from "./store"
 import { Expense } from "./types"
 
@@ -11,7 +11,7 @@ export const ExpenseItem: Component<{ expense: Expense }> = (props) => {
 	return (
 		<div class="flex justify-between">
 			<div class="flex flex-col gap-1">
-				<p class="bg-brand-red/50 self-start">{formatCurrency(props.expense.amount)}</p>
+				<p class="bg-brand-red/50 self-start">{formatMoney(props.expense.amount)}</p>
 				<p class="text-sm">{props.expense.description}</p>
 			</div>
 			<div class="flex flex-col items-end gap-1">

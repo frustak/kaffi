@@ -1,7 +1,7 @@
 import _ from "lodash"
 import { Component } from "solid-js"
 import { Title } from "../../ui/simple"
-import { formatCurrency } from "../../utils/currency"
+import { formatMoney } from "../../utils/currency"
 import { expenses } from "../expense/store"
 import { incomes } from "../income/store"
 
@@ -29,7 +29,7 @@ export const BalanceSection: Component = () => {
 					"bg-brand-red/50": sign() === "-",
 				}}
 			>
-				{formatCurrency(balance())}
+				{formatMoney(balance())}
 			</h2>
 		</div>
 	)
