@@ -18,4 +18,21 @@ function formatMoney(value: number) {
 	return formatted
 }
 
-export { formatMoney }
+function currencySign() {
+	let formatted = "$"
+	try {
+		formatted =
+			Intl.NumberFormat("en-US", {
+				style: "currency",
+				currency: settings()?.currency ?? "USD",
+				maximumFractionDigits: 0,
+			})
+				.formatToParts(0)
+				.find((part) => part.type === "currency")?.value ?? "$"
+	} catch (error) {
+		formatted = "$"
+	}
+	return formatted
+}
+
+export { formatMoney, currencySign }
