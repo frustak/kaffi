@@ -12,7 +12,7 @@ export const ExpenseItem: Component<{ expense: Expense }> = (props) => {
 		<div class="flex justify-between">
 			<div class="flex flex-col gap-1">
 				<div class="flex items-center gap-2">
-					<p class="bg-brand-green/50">{formatMoney(props.expense.amount)}</p>
+					<p class="bg-brand-red/50">{formatMoney(props.expense.amount)}</p>
 					<p class="text-brand-text/70 text-xs bg-brand-text/5">
 						{props.expense.category}
 					</p>
