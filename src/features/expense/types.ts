@@ -3,4 +3,5 @@ export type Expense = {
 	amount: number
 	date: Date
 	description: string
+	category: string
 }

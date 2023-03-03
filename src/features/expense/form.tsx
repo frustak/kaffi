@@ -2,7 +2,7 @@ import { createForm, Form, reset, zodForm } from "@modular-forms/solid"
 import { nanoid } from "nanoid"
 import { Component } from "solid-js"
 import { z } from "zod"
-import { InputField } from "../../ui/compound"
+import { InputField, SelectField } from "../../ui/compound"
 import { Button } from "../../ui/simple"
 import { currencySign } from "../../utils/currency"
 import { addExpense } from "./store"
@@ -27,6 +27,21 @@ export const ExpenseForm: Component = () => {
 					placeholder="Description"
 					type="text"
 				/>
+				<SelectField
+					of={expenseForm}
+					name="category"
+					label="Category"
+					options={[
+						"Food",
+						"Health",
+						"Insurance",
+						"Rent",
+						"Transport",
+						"Shopping",
+						"Entertainment",
+						"Other",
+					]}
+				/>
 			</div>
 			<Button type="submit">Add</Button>
 		</Form>
@@ -36,6 +51,7 @@ export const ExpenseForm: Component = () => {
 const expenseSchema = z.object({
 	amount: z.number(),
 	description: z.string(),
+	category: z.string(),
 })
 
 type ExpenseInput = z.infer<typeof expenseSchema>
@@ -45,6 +61,7 @@ const expenseForm = createForm<ExpenseInput>({
 	initialValues: {
 		amount: undefined,
 		description: "",
+		category: "Other",
 	},
 })
 

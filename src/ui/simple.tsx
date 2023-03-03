@@ -17,6 +17,13 @@ export const Input: Component<ComponentProps<"input">> = (props) => (
 	/>
 )
 
+export const Select: Component<ComponentProps<"select">> = (props) => (
+	<select
+		class="bg-transparent focus:outline-none border-none font-body text-brand-text text-base p-0"
+		{...props}
+	/>
+)
+
 export const Button: Component<ComponentProps<"button">> = (props) => (
 	<button
 		{...props}
