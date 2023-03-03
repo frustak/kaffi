@@ -11,7 +11,12 @@ export const IncomeItem: Component<{ income: Income }> = (props) => {
 	return (
 		<div class="flex justify-between">
 			<div class="flex flex-col gap-1">
-				<p class="bg-brand-green/50 self-start">{formatMoney(props.income.amount)}</p>
+				<div class="flex items-center gap-2">
+					<p class="bg-brand-green/50">{formatMoney(props.income.amount)}</p>
+					<p class="text-brand-text/70 text-xs bg-brand-text/5">
+						{props.income.category}
+					</p>
+				</div>
 				<p class="text-sm">{props.income.description}</p>
 			</div>
 			<div class="flex flex-col items-end gap-1">

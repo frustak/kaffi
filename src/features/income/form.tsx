@@ -2,7 +2,7 @@ import { createForm, Form, reset, zodForm } from "@modular-forms/solid"
 import { nanoid } from "nanoid"
 import { Component } from "solid-js"
 import { z } from "zod"
-import { InputField } from "../../ui/compound"
+import { InputField, SelectField } from "../../ui/compound"
 import { Button } from "../../ui/simple"
 import { currencySign } from "../../utils/currency"
 import { addIncome } from "./store"
@@ -27,6 +27,12 @@ export const IncomeForm: Component = () => {
 					placeholder="Description"
 					type="text"
 				/>
+				<SelectField
+					of={incomeForm}
+					name="category"
+					options={["Salary", "Bonus", "Gift", "Other"]}
+					label="Category"
+				/>
 			</div>
 			<Button type="submit">Add</Button>
 		</Form>
@@ -36,6 +42,7 @@ export const IncomeForm: Component = () => {
 const incomeSchema = z.object({
 	amount: z.number(),
 	description: z.string(),
+	category: z.string(),
 })
 
 type IncomeInput = z.infer<typeof incomeSchema>
@@ -45,6 +52,7 @@ const incomeForm = createForm<IncomeInput>({
 	initialValues: {
 		amount: undefined,
 		description: "",
+		category: "Other",
 	},
 })
 

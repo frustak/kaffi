@@ -3,4 +3,5 @@ export type Income = {
 	amount: number
 	date: Date
 	description: string
+	category: string
 }
