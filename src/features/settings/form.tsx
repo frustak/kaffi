@@ -1,5 +1,5 @@
-import { createForm, Form, zodForm } from "@modular-forms/solid"
-import { Component } from "solid-js"
+import { createForm, Form, setValue, zodForm } from "@modular-forms/solid"
+import { Component, createEffect } from "solid-js"
 import { z } from "zod"
 import { InputField } from "../../ui/compound"
 import { Anchor, Button } from "../../ui/simple"
@@ -37,6 +37,10 @@ const settingsForm = createForm<SettingsInput>({
 	initialValues: {
 		currency: settings()?.currency,
 	},
+})
+
+createEffect(() => {
+	setValue(settingsForm, "currency", settings()?.currency ?? "")
 })
 
 const submitForm = (values: SettingsInput) => {
