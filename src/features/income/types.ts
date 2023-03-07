@@ -5,3 +5,5 @@ export type Income = {
 	description: string
 	category: string
 }
+
+export type Incomes = Income[]

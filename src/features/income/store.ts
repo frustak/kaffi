@@ -1,13 +1,15 @@
 import { createStorageSignal } from "@solid-primitives/storage"
-import { Income } from "./types"
+import { Income, Incomes } from "./types"
 
-const [incomes, setIncomes] = createStorageSignal<Income[]>("incomes", [], {
+const deserializeIncomes = (value: string) =>
+	JSON.parse(value).map((income) => ({
+		...income,
+		date: new Date(income.date),
+	}))
+
+const [incomes, setIncomes] = createStorageSignal<Incomes>("incomes", [], {
 	serializer: (value) => JSON.stringify(value),
-	deserializer: (value) =>
-		JSON.parse(value).map((income) => ({
-			...income,
-			date: new Date(income.date),
-		})),
+	deserializer: deserializeIncomes,
 })
 
 const addIncome = (income: Income) => {
@@ -21,4 +23,4 @@ const removeIncome = (target: Income) => {
 	setIncomes((incomes) => incomes?.filter((income) => income.id !== target.id) ?? null)
 }
 
-export { incomes, addIncome, removeIncome }
+export { incomes, setIncomes, addIncome, removeIncome, deserializeIncomes }

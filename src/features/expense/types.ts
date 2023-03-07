@@ -5,3 +5,5 @@ export type Expense = {
 	description: string
 	category: string
 }
+
+export type Expenses = Expense[]
