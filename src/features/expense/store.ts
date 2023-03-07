@@ -1,13 +1,15 @@
 import { createStorageSignal } from "@solid-primitives/storage"
-import { Expense } from "./types"
+import { Expense, Expenses } from "./types"
 
-const [expenses, setExpenses] = createStorageSignal<Expense[]>("expenses", [], {
+const deserializeExpenses = (value: string) =>
+	JSON.parse(value).map((expense) => ({
+		...expense,
+		date: new Date(expense.date),
+	}))
+
+const [expenses, setExpenses] = createStorageSignal<Expenses>("expenses", [], {
 	serializer: (value) => JSON.stringify(value),
-	deserializer: (value) =>
-		JSON.parse(value).map((expense) => ({
-			...expense,
-			date: new Date(expense.date),
-		})),
+	deserializer: deserializeExpenses,
 })
 
 const addExpense = (expense: Expense) => {
@@ -21,4 +23,4 @@ const removeExpense = (target: Expense) => {
 	setExpenses((expenses) => expenses?.filter((expense) => expense.id !== target.id) ?? null)
 }
 
-export { expenses, addExpense, removeExpense }
+export { expenses, setExpenses, addExpense, removeExpense, deserializeExpenses }
